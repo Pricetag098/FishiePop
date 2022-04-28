@@ -3,22 +3,24 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ObjectSpeech
+public class ObjectSpeech : MonoBehaviour
 {
+    public Pond pond;
     static GameObject textBox;
     static GameObject Text;
 
     //Unique to object
     public Text theText;
 
-    private TextAsset textFile;
-    public Text AAAAAA;
+    public TextAsset textFile;
+    public TextAsset playerText;
+    //public Text AAAAAA;
     public string[] textLines;
 
     protected int currentline;
 
 
-    void Talking()
+    public void Talking()
     {
         if (textFile != null)
         {
@@ -30,7 +32,7 @@ public class ObjectSpeech
             
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            
+            TalkingPlayer();
         }
     }
 
@@ -46,7 +48,7 @@ public class ObjectSpeech
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            
+            pond.convoEnd();
         }
     }
 
@@ -65,5 +67,39 @@ public class ObjectSpeech
             
         }
     }
+    Fish theFish;
+    public void BeginConvo(Fish fish)
+	{
+        state = ConvoState.playerTalk;
+        theFish = fish;
+	}
+
+
+    public enum ConvoState
+	{
+        no,
+        playerTalk,
+        fishTalk
+	}
+    public ConvoState state;
+	private void Update()
+	{
+		switch (state)
+		{
+            case ConvoState.no:
+                break;
+
+            case ConvoState.playerTalk:
+                //called when player is talking
+
+
+
+                break;
+
+            case ConvoState.fishTalk:
+                //called when fish is talking
+                break;
+		}
+	}
 }
 

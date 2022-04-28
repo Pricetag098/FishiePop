@@ -11,6 +11,8 @@ public class Pond : MonoBehaviour
 	public GameObject reelIndFg;
 	Fish caughtFish;
 	GameObject fishObj;
+
+	public ObjectSpeech speech;
 	public enum FishState
 	{
 		waiting,
@@ -79,6 +81,7 @@ public class Pond : MonoBehaviour
 				if(reelValue <= 0)
 				{
 					NetFish();
+					
 				}
 				reelIndFg.transform.localPosition = new Vector2(reelValue - 0.5f, 0);
 				reelValue+= Time.deltaTime * caughtFish.reelSpeed;
@@ -87,7 +90,11 @@ public class Pond : MonoBehaviour
 
 				Mathf.Clamp(reelValue, 0, 1);
 				break;
+
+			case FishState.caught:
+				break;
 		}
+		
 
         
     }
@@ -126,10 +133,15 @@ public class Pond : MonoBehaviour
 		reelIndBg.SetActive(false);
 		hook.GetComponent<SpriteRenderer>().enabled = false;
 		Destroy(fishObj);
-
-
+		speech.textFile = caughtFish.dialog;
+		caughtFish.affection++;
+		speech.BeginConvo();
 	}
 	
+	public void convoEnd()
+	{
+		state = FishState.waiting;
+	}
 	private void OnMouseEnter()
 	{
         mOver = true;
