@@ -10,7 +10,7 @@ public class Pond : MonoBehaviour
 	public GameObject reelIndBg;
 	public GameObject reelIndFg;
 	Fish caughtFish;
-
+	GameObject fishObj;
 	public enum FishState
 	{
 		waiting,
@@ -33,7 +33,7 @@ public class Pond : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        rod.SetActive(false);
+		hook.GetComponent<SpriteRenderer>().enabled = false;
 		reelIndBg.SetActive(false);
 		reelIndBg.SetActive(false);
 	}
@@ -53,13 +53,13 @@ public class Pond : MonoBehaviour
 						state = FishState.cast;
 					}
 				}
-				hook.SetActive(false);
+				hook.GetComponent<SpriteRenderer>().enabled = false;
 				break;
 
 			case FishState.cast:
-				hook.SetActive(true);
-				
-				if(currentRTime>rTime)
+				hook.GetComponent<SpriteRenderer>().enabled = true;
+
+				if (currentRTime>rTime)
 				{
 					CatchFish();
 					state = FishState.reeling;
@@ -68,6 +68,8 @@ public class Pond : MonoBehaviour
 				break;
 
 			case FishState.reeling:
+				
+				hook.GetComponent<SpriteRenderer>().enabled = false;
 				reelIndBg.SetActive(true);
 				reelIndBg.SetActive(true);
 				if (reelValue >= 1)
@@ -101,7 +103,9 @@ public class Pond : MonoBehaviour
 
 	void CatchFish()
 	{
-		caughtFish = FishDataStorage.fishList[Random.Range(0,FishDataStorage.fishList.Count-1)];
+		caughtFish = FishDataStorage.fishList[Random.Range(0,FishDataStorage.fishList.Count)];
+		fishObj = Instantiate(caughtFish.hookIco);
+		fishObj.transform.position = hook.transform.position;
 		
 	}
 
@@ -109,9 +113,10 @@ public class Pond : MonoBehaviour
 	{
 		state = FishState.waiting;
 		reelValue = 0.5f;
-		hook.SetActive(false);
+		hook.GetComponent<SpriteRenderer>().enabled = false;
 		reelIndBg.SetActive(false);
 		reelIndBg.SetActive(false);
+		Destroy(fishObj);
 	}
 
 	void NetFish()
@@ -119,7 +124,10 @@ public class Pond : MonoBehaviour
 		state = FishState.caught;
 		reelIndBg.SetActive(false);
 		reelIndBg.SetActive(false);
-		hook.SetActive(false);
+		hook.GetComponent<SpriteRenderer>().enabled = false;
+		Destroy(fishObj);
+
+
 	}
 	
 	private void OnMouseEnter()
