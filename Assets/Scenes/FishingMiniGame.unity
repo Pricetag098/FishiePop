@@ -1113,11 +1113,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hookChance: 40
-  reelSpeed: 45
+  reelSpeed: 100
+  Speech: {fileID: 2067444354}
   rod: {fileID: 709922318}
   hook: {fileID: 1792253053}
   reelIndBg: {fileID: 1923366069}
   reelIndFg: {fileID: 873287217}
+  speech: {fileID: 0}
   state: 0
   reelValue: 0.5
 --- !u!212 &1897337203
@@ -1383,6 +1385,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2067444353}
   - component: {fileID: 2067444352}
+  - component: {fileID: 2067444354}
   m_Layer: 0
   m_Name: FishManager
   m_TagString: Untagged
@@ -1416,3 +1419,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2067444354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2067444351}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0422a66dcb7ef9e45ad3bdd39ddbabb6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  theText: {fileID: 1934641994}
+  pond: {fileID: 1897337202}
+  textFile: {fileID: 0}
+  AAAAAA: {fileID: 1934641994}
+  textLines: []
+  state: 0

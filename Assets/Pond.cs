@@ -5,6 +5,7 @@ using UnityEngine;
 public class Pond : MonoBehaviour
 {
 	public float hookChance, reelSpeed;
+	public ObjectSpeech Speech;
     public GameObject rod;
 	public GameObject hook;
 	public GameObject reelIndBg;
