@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ObjectSpeech
+public class ObjectSpeech : MonoBehaviour
 {
     static GameObject textBox;
     static GameObject Text;
 
     public Text theText;
 
-    private TextAsset textFile;
+    public TextAsset textFile;
     public Text AAAAAA;
     public string[] textLines;
 
@@ -64,5 +64,26 @@ public class ObjectSpeech
             
         }
     }
+
+    public enum ConvoState
+	{
+        no,
+        player,
+        fish
+	}
+    public ConvoState state;
+
+	private void Update()
+	{
+		switch (state)
+		{
+            case ConvoState.no:
+                break;
+            case ConvoState.player:
+                break;
+            case ConvoState.fish:
+                break;
+		}
+	}
 }
 
