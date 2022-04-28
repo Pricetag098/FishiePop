@@ -58,8 +58,7 @@ public class Pond : MonoBehaviour
 
 			case FishState.cast:
 				hook.SetActive(true);
-				reelIndBg.SetActive(true);
-				reelIndBg.SetActive(true);
+				
 				if(currentRTime>rTime)
 				{
 					CatchFish();
@@ -69,11 +68,13 @@ public class Pond : MonoBehaviour
 				break;
 
 			case FishState.reeling:
-				if(reelValue > 1)
+				reelIndBg.SetActive(true);
+				reelIndBg.SetActive(true);
+				if (reelValue >= 1)
 				{
 					ReleaseFish();
 				}
-				if(reelValue < 0)
+				if(reelValue <= 0)
 				{
 					NetFish();
 				}
@@ -82,6 +83,7 @@ public class Pond : MonoBehaviour
 
 				reelValue += (Input.GetAxis("Mouse ScrollWheel"))*Time.deltaTime * reelSpeed;
 
+				Mathf.Clamp(reelValue, 0, 1);
 				break;
 		}
 
@@ -99,7 +101,7 @@ public class Pond : MonoBehaviour
 
 	void CatchFish()
 	{
-		caughtFish = new Fish(0.1f);
+		caughtFish = FishDataStorage.fishList[Random.Range(0,FishDataStorage.fishList.Count-1)];
 		
 	}
 
