@@ -134,6 +134,7 @@ public class Pond : MonoBehaviour
 		reelIndBg.SetActive(false);
 		hook.GetComponent<SpriteRenderer>().enabled = false;
 		Destroy(fishObj);
+		Debug.Log(caughtFish.dialog == null);
 		speech.textFile = caughtFish.dialog;
 		caughtFish.affection++;
 		speech.BeginConvo();
