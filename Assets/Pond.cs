@@ -6,11 +6,12 @@ public class Pond : MonoBehaviour
 {
 	public float hookChance, reelSpeed;
 	public ObjectSpeech Speech;
+	
     public GameObject rod;
 	public GameObject hook;
 	public GameObject reelIndBg;
 	public GameObject reelIndFg;
-	Fish caughtFish;
+	public Fish caughtFish;
 	GameObject fishObj;
 
 	public ObjectSpeech speech;
@@ -134,7 +135,7 @@ public class Pond : MonoBehaviour
 		reelIndBg.SetActive(false);
 		hook.GetComponent<SpriteRenderer>().enabled = false;
 		Destroy(fishObj);
-		Debug.Log(caughtFish.dialog == null);
+		//Debug.Log(caughtFish.dialog == null);
 		speech.textFile = caughtFish.dialog;
 		caughtFish.affection++;
 		speech.BeginConvo();
@@ -142,6 +143,7 @@ public class Pond : MonoBehaviour
 	
 	public void convoEnd()
 	{
+		caughtFish = null;
 		state = FishState.waiting;
 	}
 	private void OnMouseEnter()

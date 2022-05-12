@@ -7,14 +7,18 @@ public class ObjectSpeech : MonoBehaviour
 {
     static GameObject textBox;
     static GameObject Text;
-
+    //public RawImage img;
+    public SpriteRenderer sr;
     public Text theText;
     public Pond pond;
     public TextAsset textFile;
+    public TextAsset playerTextAss;
     public Text AAAAAA;
     public string[] textLines;
 
     protected int currentline;
+
+    bool spoke = false;
 
     public void BeginConvo ()
     {
@@ -25,36 +29,52 @@ public class ObjectSpeech : MonoBehaviour
         state = ConvoState.no;
         pond.convoEnd();
     }
+
     void Talking()
     {
-        if (textFile != null)
+        if (!spoke)
         {
-            textLines = (textFile.text.Split('\n'));
-        }
+            if (textFile != null)
+            {
+                textLines = (textFile.text.Split('\n'));
+            }
 
-        currentline = Random.Range(0, 5);
-        theText.text = textLines[currentline];
-            
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            EndConvo();
+            currentline = Random.Range(0, textLines.Length);
+            theText.text = textLines[currentline];
+            spoke = true;
+            //img.texture = pond.caughtFish.portrait.texture;
+            sr.sprite = pond.caughtFish.portrait;
         }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                spoke = false;
+                EndConvo();
+
+            }
+        
+        
     }
 
     void TalkingPlayer()
     {
-        if (textFile != null)
+        if (!spoke)
         {
-            textLines = (textFile.text.Split('\n'));
-        }
+            if (textFile != null)
+            {
+                textLines = (playerTextAss.text.Split('\n'));
+            }
 
-        currentline = Random.Range(0, 10);
-        theText.text = textLines[currentline];
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-           state |= ConvoState.fish;
+            currentline = Random.Range(0, textLines.Length);
+            theText.text = textLines[currentline];
+            spoke = true;
         }
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                spoke = false;
+                state = ConvoState.fish;
+            }
+        
+       
     }
 
     void IdleTalking() //Only for the player

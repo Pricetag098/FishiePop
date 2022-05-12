@@ -17,7 +17,7 @@ public class Fish
 		portrait = Resources.Load(recorcePath + "/Portrait") as Sprite;
 		dialog = Resources.Load(recorcePath + "/Dialog") as TextAsset;
 
-		Debug.Log(dialog == null);
+		Debug.Log(portrait == null);
 	}
 
 
